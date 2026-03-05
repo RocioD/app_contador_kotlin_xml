@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "cl.practica.android.kotlin.xml.appcontadorkotlin"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "cl.practica.android.kotlin.xml.appcontadorkotlin"
@@ -32,6 +32,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    viewBinding {
+        enable = true
     }
 }
 
