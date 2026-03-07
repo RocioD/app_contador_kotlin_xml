@@ -20,24 +20,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        fragment = CounterFragment()
         binding.buttonIncrement.setOnClickListener {
-            contador ++
+            contador++
             binding.textViewCounter.text = contador.toString()
+            fragment.actualizarContador(contador)
         }
 
         binding.buttonDecrement.setOnClickListener {
-            if (contador > 0 ){
-                contador --
+            if (contador > 0) {
+                contador--
                 binding.textViewCounter.text = contador.toString()
+                fragment.actualizarContador(contador)
             }
 
         }
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment)
-                .commit()
-        }
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment)
+            .commit()
+
         fragment.actualizarContador(contador)
     }
 

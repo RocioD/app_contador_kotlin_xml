@@ -28,7 +28,10 @@ class CounterFragment : Fragment() {
     }
 
     fun actualizarContador(contador: Int) {
-        textViewCounterFragment.text = contador.toString()
+        if (view != null){
+            textViewCounterFragment.text = contador.toString()
+        }
+
     }
 
 
