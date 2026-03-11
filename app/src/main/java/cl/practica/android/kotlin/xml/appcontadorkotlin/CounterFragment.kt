@@ -14,7 +14,19 @@ import android.widget.TextView
  */
 class CounterFragment : Fragment() {
 
-    private lateinit var textViewCounterFragment: TextView
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(contador: Int): CounterFragment{
+            val fragment = CounterFragment()
+            val args = Bundle()
+            args.putInt("valor_contador", contador)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,13 +34,16 @@ class CounterFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_counter, container, false)
 
-        textViewCounterFragment = view.findViewById(R.id.tvCounterFragment)
+        var contadorRecibido = arguments?.getInt("valor_contador")?:0
+
+        actualizarContador(contadorRecibido)
 
         return view
     }
 
     fun actualizarContador(contador: Int) {
         if (view != null){
+            var textViewCounterFragment: TextView = requireView().findViewById(R.id.tvCounterFragment)
             textViewCounterFragment.text = contador.toString()
         }
 

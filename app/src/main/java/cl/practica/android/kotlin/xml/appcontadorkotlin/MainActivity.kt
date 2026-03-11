@@ -20,7 +20,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        fragment = CounterFragment()
+
+        fragment = CounterFragment.newInstance(contador)
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment)
+            .commit()
+
+        if (savedInstanceState != null){
+            contador = savedInstanceState.getInt("contador_guardado", 0)
+            fragment.actualizarContador(contador)
+        }
+
+
+
+        binding.textViewCounter.text = contador.toString()
+
+
         binding.buttonIncrement.setOnClickListener {
             contador++
             binding.textViewCounter.text = contador.toString()
@@ -37,11 +52,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment)
-            .commit()
 
-        fragment.actualizarContador(contador)
+
+
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("contador_guardado", contador)
+    }
 
 }
